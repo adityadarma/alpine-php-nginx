@@ -1,11 +1,11 @@
-FROM alpine:3.16
+FROM alpine:3.14
 
 # Set label information
 LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"
 LABEL Description="Lightweight Image for development."
-LABEL OS Version="Alpine Linux 3.16"
-LABEL PHP Version="8.0"
-LABEL Nginx Version="1.22.0"
+LABEL OS Version="Alpine Linux 3.14"
+LABEL PHP Version="7.4"
+LABEL Nginx Version="1.20.2"
 
 # Setup document root for application
 WORKDIR /var/www/html
@@ -18,38 +18,38 @@ RUN apk add --no-cache \
 
 # Install package PHP
 RUN apk add --no-cache \
-    php8 \
-    php8-bcmath \
-    php8-ctype \
-    php8-curl \
-    php8-dom \
-    php8-fileinfo \
-    php8-fpm \
-    php8-gd \
-    php8-iconv \
-    php8-json \
-    php8-mbstring \
-    php8-opcache \
-    php8-openssl \
-    php8-pdo_mysql \
-    php8-pdo_pgsql \
-    php8-pecl-imagick \
-    php8-phar \
-    php8-simplexml \
-    php8-session \
-    php8-tokenizer \
-    php8-xml \
-    php8-xmlreader \
-    php8-zip \
-    php8-zlib
+    php7 \
+    php7-bcmath \
+    php7-ctype \
+    php7-curl \
+    php7-dom \
+    php7-fileinfo \
+    php7-fpm \
+    php7-gd \
+    php7-iconv \
+    php7-json \
+    php7-mbstring \
+    php7-opcache \
+    php7-openssl \
+    php7-pdo_mysql \
+    php7-pdo_pgsql \
+    php7-pecl-imagick \
+    php7-phar \
+    php7-simplexml \
+    php7-session \
+    php7-tokenizer \
+    php7-xml \
+    php7-xmlreader \
+    php7-zip \
+    php7-zlib
 
 # Configure PHP-FPM
-COPY .docker/www.conf /etc/php8/php-fpm.d/www.conf
-COPY .docker/custom.ini /etc/php8/conf.d/custom.ini
+COPY .docker/www.conf /etc/php7/php-fpm.d/www.conf
+COPY .docker/custom.ini /etc/php7/conf.d/custom.ini
 
 # Install packages Nginx
 RUN apk add --no-cache \
-    nginx=1.22.0-r1
+    nginx=1.20.2-r1
 
 # Configure nginx
 COPY .docker/nginx.conf /etc/nginx/nginx.conf
