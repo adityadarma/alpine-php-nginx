@@ -1,11 +1,11 @@
-FROM alpine:3.14
+FROM alpine:3.15
 
 # Set label information
 LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"
 LABEL Description="Lightweight Image for development."
-LABEL OS Version="Alpine Linux 3.14"
+LABEL OS Version="Alpine Linux 3.15"
 LABEL PHP Version="7.4"
-LABEL Nginx Version="1.20.2"
+LABEL Nginx Version="1.20"
 
 # Setup document root for application
 WORKDIR /var/www/html
@@ -29,6 +29,7 @@ RUN apk add --no-cache \
     php7-iconv \
     php7-json \
     php7-mbstring \
+    php7-mysqli \
     php7-opcache \
     php7-openssl \
     php7-pdo_mysql \
@@ -50,7 +51,7 @@ COPY .docker/custom.ini /etc/php7/conf.d/custom.ini
 
 # Install packages Nginx
 RUN apk add --no-cache \
-    nginx=1.20.2-r1
+    nginx
 
 # Configure nginx
 COPY .docker/nginx.conf /etc/nginx/nginx.conf
