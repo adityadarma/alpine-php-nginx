@@ -50,7 +50,7 @@ COPY .docker/custom.ini /etc/php8/conf.d/custom.ini
 
 # Install packages Nginx
 RUN apk add --no-cache \
-    nginx=1.22.0-r1
+    nginx
 
 # Configure nginx
 COPY .docker/nginx.conf /etc/nginx/nginx.conf
