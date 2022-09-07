@@ -40,6 +40,7 @@ RUN apk add --no-cache \
     php8-tokenizer \
     php8-xml \
     php8-xmlreader \
+    php8-xmlwriter \
     php8-zip \
     php8-zlib
 
