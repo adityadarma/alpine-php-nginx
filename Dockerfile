@@ -1,7 +1,5 @@
 FROM alpine:3.15
 
-ENV PORT 8000
-
 # Set label information
 LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"
 LABEL Description="Lightweight Image for development."
@@ -59,7 +57,7 @@ RUN apk add --no-cache \
 COPY .docker/nginx.conf /etc/nginx/nginx.conf
 
 # Expose the port nginx is reachable on
-EXPOSE ${PORT}
+EXPOSE 80
 
 # Install packages Supervisor
 RUN apk add --no-cache \
