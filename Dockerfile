@@ -4,7 +4,7 @@ FROM alpine:3.16
 LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"
 LABEL Description="Lightweight Image for development."
 LABEL OS Version="Alpine Linux 3.16"
-LABEL PHP Version="8.0"
+LABEL PHP Version="8.1"
 LABEL Nginx Version="1.22.0"
 
 # Setup document root for application
@@ -18,35 +18,35 @@ RUN apk add --no-cache \
 
 # Install package PHP
 RUN apk add --no-cache \
-    php8 \
-    php8-bcmath \
-    php8-ctype \
-    php8-curl \
-    php8-dom \
-    php8-fileinfo \
-    php8-fpm \
-    php8-gd \
-    php8-iconv \
-    php8-json \
-    php8-mbstring \
-    php8-opcache \
-    php8-openssl \
-    php8-pdo_mysql \
-    php8-pdo_pgsql \
-    php8-pecl-imagick \
-    php8-phar \
-    php8-simplexml \
-    php8-session \
-    php8-tokenizer \
-    php8-xml \
-    php8-xmlreader \
-    php8-xmlwriter \
-    php8-zip \
-    php8-zlib
+    php81 \
+    php81-bcmath \
+    php81-ctype \
+    php81-curl \
+    php81-dom \
+    php81-fileinfo \
+    php81-fpm \
+    php81-gd \
+    php81-iconv \
+    php81-json \
+    php81-mbstring \
+    php81-opcache \
+    php81-openssl \
+    php81-pdo_mysql \
+    php81-pdo_pgsql \
+    php81-pecl-imagick \
+    php81-phar \
+    php81-simplexml \
+    php81-session \
+    php81-tokenizer \
+    php81-xml \
+    php81-xmlreader \
+    php81-xmlwriter \
+    php81-zip \
+    php81-zlib
 
 # Configure PHP-FPM
-COPY .docker/www.conf /etc/php8/php-fpm.d/www.conf
-COPY .docker/custom.ini /etc/php8/conf.d/custom.ini
+COPY .docker/www.conf /etc/php81/php-fpm.d/www.conf
+COPY .docker/custom.ini /etc/php81/conf.d/custom.ini
 
 # Install packages Nginx
 RUN apk add --no-cache \
