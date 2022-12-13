@@ -8,7 +8,7 @@ LABEL PHP Version="8.1"
 LABEL Nginx Version="1.22.0"
 
 # Setup document root for application
-WORKDIR /var/www/html
+WORKDIR /app
 
 # Install packages default without cache
 RUN apk add --no-cache \
@@ -69,7 +69,7 @@ COPY .docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
-RUN chown -R nobody.nobody /var/www/html /run /var/lib/nginx /var/log/nginx
+RUN chown -R nobody.nobody /app /run /var/lib/nginx /var/log/nginx
 
 # Switch to use a non-root user from here on
 USER nobody
