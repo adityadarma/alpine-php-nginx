@@ -1,11 +1,11 @@
-FROM alpine:3.15
+FROM alpine:3.16
 
 # Set label information
 LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"
 LABEL Description="Lightweight Image for development."
-LABEL OS Version="Alpine Linux 3.15"
-LABEL PHP Version="7.4"
-LABEL Nginx Version="1.20"
+LABEL OS Version="Alpine Linux 3.16"
+LABEL PHP Version="8.1"
+LABEL Nginx Version="1.22.0"
 
 # Setup document root for application
 WORKDIR /app
@@ -18,6 +18,7 @@ RUN apk add --no-cache \
 
 # Install package PHP
 RUN apk add --no-cache \
+    # Default
     php7 \
     php7-bcmath \
     php7-ctype \
@@ -25,16 +26,11 @@ RUN apk add --no-cache \
     php7-dom \
     php7-fileinfo \
     php7-fpm \
-    php7-gd \
     php7-iconv \
     php7-json \
     php7-mbstring \
-    php7-mysqli \
     php7-opcache \
     php7-openssl \
-    php7-pdo_mysql \
-    php7-pdo_pgsql \
-    php7-pecl-imagick \
     php7-phar \
     php7-simplexml \
     php7-session \
@@ -43,7 +39,13 @@ RUN apk add --no-cache \
     php7-xmlreader \
     php7-xmlwriter \
     php7-zip \
-    php7-zlib
+    php7-zlib \
+    # Database
+    php7-pdo_mysql \
+    php7-pdo_pgsql \
+    # Image
+    php7-gd \
+    php7-pecl-imagick
 
 # Configure PHP-FPM
 COPY .docker/www.conf /etc/php7/php-fpm.d/www.conf
