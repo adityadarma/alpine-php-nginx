@@ -4,7 +4,7 @@ FROM alpine:3.16
 LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"
 LABEL Description="Lightweight Image for development."
 LABEL OS Version="Alpine Linux 3.16"
-LABEL PHP Version="8.0"
+LABEL PHP Version="8.1"
 LABEL Nginx Version="1.22.0"
 
 # Setup document root for application
@@ -18,6 +18,7 @@ RUN apk add --no-cache \
 
 # Install package PHP
 RUN apk add --no-cache \
+    # Default
     php8 \
     php8-bcmath \
     php8-ctype \
@@ -25,15 +26,11 @@ RUN apk add --no-cache \
     php8-dom \
     php8-fileinfo \
     php8-fpm \
-    php8-gd \
     php8-iconv \
     php8-json \
     php8-mbstring \
     php8-opcache \
     php8-openssl \
-    php8-pdo_mysql \
-    php8-pdo_pgsql \
-    php8-pecl-imagick \
     php8-phar \
     php8-simplexml \
     php8-session \
@@ -42,7 +39,13 @@ RUN apk add --no-cache \
     php8-xmlreader \
     php8-xmlwriter \
     php8-zip \
-    php8-zlib
+    php8-zlib \
+    # Database
+    php8-pdo_mysql \
+    php8-pdo_pgsql \
+    # Image
+    php8-gd \
+    php8-pecl-imagick
 
 # Configure PHP-FPM
 COPY .docker/www.conf /etc/php8/php-fpm.d/www.conf
