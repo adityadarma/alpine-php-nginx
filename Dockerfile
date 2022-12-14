@@ -18,6 +18,7 @@ RUN apk add --no-cache \
 
 # Install package PHP
 RUN apk add --no-cache \
+    # Default
     php81 \
     php81-bcmath \
     php81-ctype \
@@ -25,15 +26,11 @@ RUN apk add --no-cache \
     php81-dom \
     php81-fileinfo \
     php81-fpm \
-    php81-gd \
     php81-iconv \
     php81-json \
     php81-mbstring \
     php81-opcache \
     php81-openssl \
-    php81-pdo_mysql \
-    php81-pdo_pgsql \
-    php81-pecl-imagick \
     php81-phar \
     php81-simplexml \
     php81-session \
@@ -42,7 +39,13 @@ RUN apk add --no-cache \
     php81-xmlreader \
     php81-xmlwriter \
     php81-zip \
-    php81-zlib
+    php81-zlib \
+    # Database
+    php81-pdo_mysql \
+    php81-pdo_pgsql \
+    # Image
+    php81-gd \
+    php81-pecl-imagick
 
 # Configure PHP-FPM
 COPY .docker/www.conf /etc/php81/php-fpm.d/www.conf
