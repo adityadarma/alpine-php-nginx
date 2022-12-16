@@ -1,11 +1,11 @@
-FROM alpine:3.16
+FROM alpine:3.15
 
 # Set label information
 LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"
 LABEL Description="Lightweight Image for development."
-LABEL OS Version="Alpine Linux 3.16"
-LABEL PHP Version="8.1"
-LABEL Nginx Version="1.22.0"
+LABEL OS Version="Alpine Linux 3.15"
+LABEL PHP Version="7.4"
+LABEL Nginx Version="1.20"
 
 # Setup document root for application
 WORKDIR /app
@@ -41,6 +41,7 @@ RUN apk add --no-cache \
     php7-zip \
     php7-zlib \
     # Database
+    php7-mysqli \
     php7-pdo_mysql \
     php7-pdo_pgsql \
     # Image
