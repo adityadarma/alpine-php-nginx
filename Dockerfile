@@ -59,7 +59,7 @@ RUN apk add --no-cache \
 COPY .docker/nginx.conf /etc/nginx/nginx.conf
 
 # Expose the port nginx is reachable on
-EXPOSE 80
+EXPOSE 8000
 
 # Install packages Supervisor
 RUN apk add --no-cache \
