@@ -1,11 +1,11 @@
-FROM alpine:3.16
+FROM alpine:3.17
 
 # Set label information
 LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"
 LABEL Description="Lightweight Image for development."
-LABEL OS Version="Alpine Linux 3.16"
+LABEL OS Version="Alpine Linux 3.17"
 LABEL PHP Version="8.1"
-LABEL Nginx Version="1.22.0"
+LABEL Nginx Version="1.22"
 
 # Setup document root for application
 WORKDIR /app
@@ -46,6 +46,12 @@ RUN apk add --no-cache \
     # Image
     php81-gd \
     php81-pecl-imagick
+
+# Install packages NodeJS
+RUN apk add --no-cache \
+    nodejs \
+    npm
+RUN npm install -g npm
 
 # Configure PHP-FPM
 COPY .docker/www.conf /etc/php81/php-fpm.d/www.conf
