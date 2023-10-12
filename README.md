@@ -32,10 +32,12 @@
 - php*-gd
 - php*-pecl-imagick
 
-## Build
+## Build X86_64
 - docker build -t adityadarma/alpine-php-nginx:8.1 -f x86_64/8.1/Dockerfile .
 - docker build -t adityadarma/alpine-php-nginx:8.0 -f x86_64/8.0/Dockerfile .
 - docker build -t adityadarma/alpine-php-nginx:7.4 -f x86_64/7.4/Dockerfile .
+
+## Build ARM64
 - docker build -t adityadarma/alpine-php-nginx:7.4-arm64 -f ARM64/7.4/Dockerfile .
 
 ## Push
