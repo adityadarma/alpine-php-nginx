@@ -67,7 +67,7 @@ RUN apk add --no-cache \
     supervisor
 
 # Configure supervisord
-COPY x86_64/8.0/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ../../supervisor/8.0/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Install composer from the official image
 COPY --from=composer /usr/bin/composer /usr/bin/composer
