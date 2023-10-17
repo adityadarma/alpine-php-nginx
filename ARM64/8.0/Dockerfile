@@ -1,4 +1,4 @@
-FROM alpine:3.16
+FROM arm64v8/alpine:3.16
 
 # Set label information
 LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"

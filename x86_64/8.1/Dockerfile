@@ -41,6 +41,7 @@ RUN apk add --no-cache \
     php81-zip \
     php81-zlib \
     # Database
+    php81-mysqli \
     php81-pdo_mysql \
     php81-pdo_pgsql \
     # Image
