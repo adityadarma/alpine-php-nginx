@@ -41,6 +41,7 @@
 - docker build -t adityadarma/alpine-php-nginx:7.4-arm64 -f ARM64/7.4/Dockerfile .
 - docker build -t adityadarma/alpine-php-nginx:8.0-arm64 -f ARM64/8.0/Dockerfile .
 - docker build -t adityadarma/alpine-php-nginx:8.1-arm64 -f ARM64/8.1/Dockerfile .
+- docker build -t adityadarma/alpine-php-nginx:8.2-arm64 -f ARM64/8.2/Dockerfile .
 
 ## Push
 - docker push adityadarma/alpine-php-nginx:8.1
@@ -49,3 +50,4 @@
 - docker push adityadarma/alpine-php-nginx:7.4-arm64
 - docker push adityadarma/alpine-php-nginx:8.0-arm64
 - docker push adityadarma/alpine-php-nginx:8.1-arm64
+- docker push adityadarma/alpine-php-nginx:8.2-arm64
