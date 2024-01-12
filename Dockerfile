@@ -5,7 +5,7 @@ FROM ${ALPINE_OS}:${ALPINE_VERSION}
 
 ARG PHP_VERSION
 ARG PHP_NUMBER
-ARG ENV_SERVER=dev
+ARG ENVIROMENT=general
 
 # Set label information
 LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"
@@ -57,7 +57,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY custom/www.conf /etc/php${PHP_NUMBER}/php-fpm.d/www.conf
 COPY custom/php-custom.ini /etc/php${PHP_NUMBER}/conf.d/custom.ini
 COPY custom/nginx.conf /etc/nginx/nginx.conf
-COPY supervisor/${PHP_VERSION}/supervisord-${ENV_SERVER}.conf /etc/supervisord.conf
+COPY supervisor/${PHP_VERSION}/supervisord-${ENVIROMENT}.conf /etc/supervisord.conf
 
 # Setup document root for application
 WORKDIR /app
@@ -67,9 +67,6 @@ RUN chown -R nobody.nobody /app /run /var/lib/nginx /var/log/nginx
 
 # Switch to use a non-root user from here on
 USER nobody
-
-# Run a cron job
-# RUN echo '* * * * * php /app/artisan schedule:run' >> /etc/crontabs/nobody
 
 # Expose the port nginx is reachable on
 EXPOSE 8000
