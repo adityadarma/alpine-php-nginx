@@ -20,6 +20,7 @@ RUN apk add --no-cache \
     nano \
     nginx \
     supervisor \
+    mysql-client \
     php${PHP_NUMBER} \
     php${PHP_NUMBER}-bcmath \
     php${PHP_NUMBER}-ctype \
