@@ -48,6 +48,8 @@ RUN apk add --no-cache \
     php${PHP_NUMBER}-gd \
     php${PHP_NUMBER}-pecl-imagick 
 
+RUN if [ ! -e /usr/bin/php ]; then ln -s /usr/bin/php{PHP_NUMBER} /usr/bin/php; fi
+
 # Remove cache application
 RUN rm -rf /var/cache/apk/*
 
