@@ -35,9 +35,9 @@ RUN apk add --no-cache \
     php${PHP_NUMBER}-mysqli \
     php${PHP_NUMBER}-opcache \
     php${PHP_NUMBER}-openssl \
-    php${PHP_NUMBER}-pecl-imagick \
     php${PHP_NUMBER}-pdo_mysql \
     php${PHP_NUMBER}-pdo_pgsql \
+    php${PHP_NUMBER}-pecl-imagick \
     php${PHP_NUMBER}-phar \
     php${PHP_NUMBER}-session \
     php${PHP_NUMBER}-simplexml \
@@ -52,7 +52,7 @@ RUN apk add --no-cache \
 RUN rm -rf /var/cache/apk/*
 
 # Symlink if not found
-RUN if [ ! -e /usr/bin/php ]; then ln -s /usr/bin/php{PHP_NUMBER} /usr/bin/php; fi
+RUN if [ ! -e /usr/bin/php ]; then ln -s /usr/bin/php${PHP_NUMBER} /usr/bin/php; fi
 
 # Install composer from the official image
 COPY --from=composer /usr/bin/composer /usr/bin/composer
@@ -61,7 +61,10 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY custom/www.conf /etc/php${PHP_NUMBER}/php-fpm.d/www.conf
 COPY custom/php-custom.ini /etc/php${PHP_NUMBER}/conf.d/custom.ini
 COPY custom/nginx.conf /etc/nginx/nginx.conf
-COPY supervisor/${PHP_VERSION}/supervisord-${ENVIROMENT}.conf /etc/supervisord.conf
+COPY supervisor/supervisord-${ENVIROMENT}.conf /etc/supervisord.conf
+
+# Replace string
+RUN sed -i "s|command=php-fpm\${PHP_NUMBER} -F|command=php-fpm${PHP_NUMBER} -F|g" /etc/supervisord.conf
 
 # Setup document root for application
 WORKDIR /app

@@ -6,6 +6,7 @@
 - nano
 - nginx
 - supervisor
+- mysql-client (opsional)
 
 ## Module PHP
 ### Pre Required
@@ -16,28 +17,25 @@
 - php*-dom
 - php*-fileinfo
 - php*-fpm
+- php*-gd (opsional)
 - php*-iconv
 - php*-json
 - php*-mbstring
+- php*-mysqli
 - php*-opcache
 - php*-openssl
-- php*-phar
-- php*-simplexml
+- php*-pdo_mysql
+- php*-pdo_pgsql (opsional)
+- php*-pecl-imagick (opsional)
+- php*-phar (opsional)
 - php*-session
+- php*-simplexml (opsional)
 - php*-tokenizer
 - php*-xml
-- php*-xmlreader
-- php*-xmlwriter
-- php*-zip
-- php*-zlib
-
-### Database
-- php*-pdo_mysql
-- php*-pdo_pgsql
-
-### Image
-- php*-gd
-- php*-pecl-imagick
+- php*-xmlreader (opsional)
+- php*-xmlwriter (opsional)
+- php*-zip (opsional)
+- php*-zlib (opsional)
 
 # Build
 

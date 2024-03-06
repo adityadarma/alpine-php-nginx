@@ -7,7 +7,7 @@ echo "Build dan push Docker image PHP 7.4 selesai."
 
 # Docker image PHP 8.0
 docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.16" --build-arg="PHP_VERSION=8.0" --build-arg="PHP_NUMBER=8" -t adityadarma/alpine-php-nginx:8.0-arm64 -f Dockerfile .
-ddocker push adityadarma/alpine-php-nginx:8.0-arm64
+docker push adityadarma/alpine-php-nginx:8.0-arm64
 echo "Build dan push Docker image PHP 8.0 selesai."
 
 # Docker image PHP 8.1
