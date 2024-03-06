@@ -28,30 +28,31 @@ RUN apk add --no-cache \
     php${PHP_NUMBER}-dom \
     php${PHP_NUMBER}-fileinfo \
     php${PHP_NUMBER}-fpm \
+    php${PHP_NUMBER}-gd \
     php${PHP_NUMBER}-iconv \
     php${PHP_NUMBER}-json \
     php${PHP_NUMBER}-mbstring \
+    php${PHP_NUMBER}-mysqli \
     php${PHP_NUMBER}-opcache \
     php${PHP_NUMBER}-openssl \
+    php${PHP_NUMBER}-pecl-imagick \
+    php${PHP_NUMBER}-pdo_mysql \
+    php${PHP_NUMBER}-pdo_pgsql \
     php${PHP_NUMBER}-phar \
-    php${PHP_NUMBER}-simplexml \
     php${PHP_NUMBER}-session \
+    php${PHP_NUMBER}-simplexml \
     php${PHP_NUMBER}-tokenizer \
     php${PHP_NUMBER}-xml \
     php${PHP_NUMBER}-xmlreader \
     php${PHP_NUMBER}-xmlwriter \
     php${PHP_NUMBER}-zip \
-    php${PHP_NUMBER}-zlib \
-    php${PHP_NUMBER}-mysqli \
-    php${PHP_NUMBER}-pdo_mysql \
-    php${PHP_NUMBER}-pdo_pgsql \
-    php${PHP_NUMBER}-gd \
-    php${PHP_NUMBER}-pecl-imagick 
-
-RUN if [ ! -e /usr/bin/php ]; then ln -s /usr/bin/php{PHP_NUMBER} /usr/bin/php; fi
+    php${PHP_NUMBER}-zlib
 
 # Remove cache application
 RUN rm -rf /var/cache/apk/*
+
+# Symlink if not found
+RUN if [ ! -e /usr/bin/php ]; then ln -s /usr/bin/php{PHP_NUMBER} /usr/bin/php; fi
 
 # Install composer from the official image
 COPY --from=composer /usr/bin/composer /usr/bin/composer
