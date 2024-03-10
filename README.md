@@ -15,6 +15,7 @@
 - php*-ctype
 - php*-curl
 - php*-dom
+- php*-exif (opsional)
 - php*-fileinfo
 - php*-fpm
 - php*-gd (opsional)
@@ -75,11 +76,5 @@
 ## Build Otomatis
 
 ### Permission
-chmod +x build_x86.sh
-chmod +x build_arm64.sh
-
-### X86
-./build_x86.sh
-
-### ARM64
-./build_arm64.sh
+chmod +x build.sh
+./build.sh

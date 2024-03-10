@@ -26,6 +26,7 @@ RUN apk add --no-cache \
     php${PHP_NUMBER}-ctype \
     php${PHP_NUMBER}-curl \
     php${PHP_NUMBER}-dom \
+    php${PHP_NUMBER}-exif \
     php${PHP_NUMBER}-fileinfo \
     php${PHP_NUMBER}-fpm \
     php${PHP_NUMBER}-gd \
