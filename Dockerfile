@@ -47,10 +47,8 @@ RUN apk add --update --no-cache \
     php${PHP_NUMBER}-xmlreader \
     php${PHP_NUMBER}-xmlwriter \
     php${PHP_NUMBER}-zip \
-    php${PHP_NUMBER}-zlib
-
-# Remove cache application
-RUN rm -rf /var/cache/apk/*
+    php${PHP_NUMBER}-zlib \
+    && rm -rf /var/cache/apk/*
 
 # Symlink if not found
 RUN if [ ! -e /usr/bin/php ]; then ln -s /usr/bin/php${PHP_NUMBER} /usr/bin/php; fi
