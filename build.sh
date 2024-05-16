@@ -30,6 +30,16 @@ case $ARCH in
         docker build --build-arg="ALPINE_OS=alpine" --build-arg="ALPINE_VERSION=3.19" --build-arg="PHP_VERSION=8.3" --build-arg="PHP_NUMBER=83" -t adityadarma/alpine-php-nginx:8.3 -f Dockerfile .
         docker push adityadarma/alpine-php-nginx:8.3
         echo "Build dan push Docker image PHP 8.3 selesai."
+
+        # Docker image PHP 8.1
+        docker build --build-arg="ALPINE_OS=alpine" --build-arg="ALPINE_VERSION=3.17" --build-arg="PHP_VERSION=8.1" --build-arg="PHP_NUMBER=81" --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:8.1-laravel -f Dockerfile .
+        docker push adityadarma/alpine-php-nginx:8.1-laravel
+        echo "Build dan push Docker image PHP 8.1 laravel selesai."
+
+        # Docker image PHP 8.3
+        docker build --build-arg="ALPINE_OS=alpine" --build-arg="ALPINE_VERSION=3.19" --build-arg="PHP_VERSION=8.3" --build-arg="PHP_NUMBER=83" --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:8.3-laravel -f Dockerfile .
+        docker push adityadarma/alpine-php-nginx:8.3-laravel
+        echo "Build dan push Docker image PHP 8.3 laravel selesai."
         ;;
     arm*)
         # Docker image PHP 7.4
@@ -56,6 +66,16 @@ case $ARCH in
         docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.19" --build-arg="PHP_VERSION=8.3" --build-arg="PHP_NUMBER=83" -t adityadarma/alpine-php-nginx:8.3-arm64 -f Dockerfile .
         docker push adityadarma/alpine-php-nginx:8.3-arm64
         echo "Build dan push Docker image PHP 8.3 selesai."
+
+        # Docker image PHP 8.1
+        docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.17" --build-arg="PHP_VERSION=8.1" --build-arg="PHP_NUMBER=81" --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:8.1-laravel-arm64 -f Dockerfile .
+        docker push adityadarma/alpine-php-nginx:8.1-laravel-arm64
+        echo "Build dan push Docker image PHP 8.1 laravel selesai."
+
+        # Docker image PHP 8.3
+        docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.19" --build-arg="PHP_VERSION=8.3" --build-arg="PHP_NUMBER=83" --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:8.3-laravel-arm64 -f Dockerfile .
+        docker push adityadarma/alpine-php-nginx:8.3-laravel-arm64
+        echo "Build dan push Docker image PHP 8.3 laravel selesai."
         ;;
     *)
         echo "Arsitektur tidak dikenal: $ARCH"
