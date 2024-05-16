@@ -1,6 +1,6 @@
 # Docker Alpine Linux Lightweight
 
-## Module PHP
+## Module General
 - curl
 - git
 - nano
