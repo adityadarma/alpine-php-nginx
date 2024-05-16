@@ -30,7 +30,7 @@ case $ARCH in
         docker build --build-arg="ALPINE_OS=alpine" --build-arg="ALPINE_VERSION=3.19" --build-arg="PHP_VERSION=8.3" --build-arg="PHP_NUMBER=83" -t adityadarma/alpine-php-nginx:8.3 -f Dockerfile .
         docker push adityadarma/alpine-php-nginx:8.3
         echo "Build dan push Docker image PHP 8.3 selesai."
-        ;
+        ;;
     arm*)
         # Docker image PHP 7.4
         docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.15" --build-arg="PHP_VERSION=7.4" --build-arg="PHP_NUMBER=7" -t adityadarma/alpine-php-nginx:7.4-arm64 -f Dockerfile .
@@ -56,8 +56,8 @@ case $ARCH in
         docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.19" --build-arg="PHP_VERSION=8.3" --build-arg="PHP_NUMBER=83" -t adityadarma/alpine-php-nginx:8.3-arm64 -f Dockerfile .
         docker push adityadarma/alpine-php-nginx:8.3-arm64
         echo "Build dan push Docker image PHP 8.3 selesai."
-        ;
+        ;;
     *)
         echo "Arsitektur tidak dikenal: $ARCH"
-        ;
+        ;;
 esac
