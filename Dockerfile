@@ -60,7 +60,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY custom/www.conf /etc/php${PHP_NUMBER}/php-fpm.d/www.conf
 COPY custom/php-custom.ini /etc/php${PHP_NUMBER}/conf.d/custom.ini
 COPY custom/nginx.conf /etc/nginx/nginx.conf
-COPY custom/supervisord.conf /etc/supervisord.conf
+COPY custom/supervisord-${ENVIROMENT}.conf /etc/supervisord.conf
 
 # Replace string
 RUN sed -i "s|command=php-fpm\${PHP_NUMBER} -F|command=php-fpm${PHP_NUMBER} -F|g" /etc/supervisord.conf
