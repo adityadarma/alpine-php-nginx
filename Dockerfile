@@ -38,6 +38,7 @@ RUN apk add --update --no-cache \
     php${PHP_NUMBER}-openssl \
     php${PHP_NUMBER}-pdo_mysql \
     php${PHP_NUMBER}-pdo_pgsql \
+    php${PHP_NUMBER}-pdo_sqlite \
     php${PHP_NUMBER}-pecl-imagick \
     php${PHP_NUMBER}-phar \
     php${PHP_NUMBER}-session \

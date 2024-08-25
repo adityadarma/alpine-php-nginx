@@ -2,8 +2,8 @@
 
 ## Module General
 - curl
-- git
-- nano
+- git (opsional)
+- nano (opsional)
 - nginx
 - supervisor
 - mysql-client (opsional)
@@ -22,11 +22,12 @@
 - php*-iconv
 - php*-json
 - php*-mbstring
-- php*-mysqli
+- php*-mysqli (opsional)
 - php*-opcache
 - php*-openssl
-- php*-pdo_mysql
+- php*-pdo_mysql (default)
 - php*-pdo_pgsql (opsional)
+- php*-pdo_sqlite (opsional)
 - php*-pecl-imagick (opsional)
 - php*-phar (opsional)
 - php*-session
@@ -51,6 +52,7 @@
 - docker build --build-arg="ALPINE_OS=alpine" --build-arg="ALPINE_VERSION=3.17" --build-arg="PHP_VERSION=8.1" --build-arg="PHP_NUMBER=81" -t adityadarma/alpine-php-nginx:8.1 -f Dockerfile .
 - docker build --build-arg="ALPINE_OS=alpine" --build-arg="ALPINE_VERSION=3.18" --build-arg="PHP_VERSION=8.2" --build-arg="PHP_NUMBER=82" -t adityadarma/alpine-php-nginx:8.2 -f Dockerfile .
 - docker build --build-arg="ALPINE_OS=alpine" --build-arg="ALPINE_VERSION=3.19" --build-arg="PHP_VERSION=8.3" --build-arg="PHP_NUMBER=83" -t adityadarma/alpine-php-nginx:8.3 -f Dockerfile .
+- docker build --build-arg="ALPINE_OS=alpine" --build-arg="ALPINE_VERSION=3.15" --build-arg="PHP_VERSION=7.4" --build-arg="PHP_NUMBER=7" --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:7.4-laravel -f Dockerfile .
 - docker build --build-arg="ALPINE_OS=alpine" --build-arg="ALPINE_VERSION=3.17" --build-arg="PHP_VERSION=8.1" --build-arg="PHP_NUMBER=81" --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:8.1-laravel -f Dockerfile .
 - docker build --build-arg="ALPINE_OS=alpine" --build-arg="ALPINE_VERSION=3.19" --build-arg="PHP_VERSION=8.3" --build-arg="PHP_NUMBER=83" --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:8.3-laravel -f Dockerfile .
 
@@ -61,8 +63,7 @@
 - docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.18" --build-arg="PHP_VERSION=8.2" --build-arg="PHP_NUMBER=82" -t adityadarma/alpine-php-nginx:8.2-arm64 -f Dockerfile .
 - docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.19" --build-arg="PHP_VERSION=8.3" --build-arg="PHP_NUMBER=83" -t adityadarma/alpine-php-nginx:8.3-arm64 -f Dockerfile .
 - docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.15" --build-arg="PHP_VERSION=7.4" --build-arg="PHP_NUMBER=7"  --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:7.4-arm64-laravel -f Dockerfile .
-- docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.17" --build-arg="PHP_VERSION=8.1" --build-arg="PHP_NUMBER=81" --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:8.1-arm64-laravel -f 
-Dockerfile .
+- docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.17" --build-arg="PHP_VERSION=8.1" --build-arg="PHP_NUMBER=81" --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:8.1-arm64-laravel -f Dockerfile .
 - docker build --build-arg="ALPINE_OS=arm64v8/alpine" --build-arg="ALPINE_VERSION=3.19" --build-arg="PHP_VERSION=8.3" --build-arg="PHP_NUMBER=83" --build-arg="ENVIROMENT=laravel" -t adityadarma/alpine-php-nginx:8.3-arm64-laravel -f Dockerfile .
 
 ### Push X86_64
@@ -71,6 +72,7 @@ Dockerfile .
 - docker push adityadarma/alpine-php-nginx:8.1
 - docker push adityadarma/alpine-php-nginx:8.2
 - docker push adityadarma/alpine-php-nginx:8.3
+- docker push adityadarma/alpine-php-nginx:7.4-laravel
 - docker push adityadarma/alpine-php-nginx:8.1-laravel
 - docker push adityadarma/alpine-php-nginx:8.3-laravel
 
