@@ -1,0 +1,25 @@
+name: Docker Alpine Linux Lightweight
+
+on:
+  push:
+    branches: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+      - name: install buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          version: latest
+      - name: build the image
+      run: |
+        docker buildx build \
+          --platform=linux/arm64/v8,linux/amd64 \
+          --build-arg="ALPINE_VERSION=3.15" \
+          --build-arg="PHP_VERSION=7.4" \
+          --build-arg="PHP_NUMBER=7" \
+          --tag adityadarma/alpine-php-nginx:7.4 .
