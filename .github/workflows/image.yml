@@ -2,7 +2,7 @@ name: Docker Alpine Linux Lightweight
 
 on:
   push:
-    branches: main
+    branches: build
 
 jobs:
   build:
@@ -28,3 +28,55 @@ jobs:
             --build-arg="PHP_VERSION=7.4" \
             --build-arg="PHP_NUMBER=7" \
             --tag adityadarma/alpine-php-nginx:7.4 .
+        run: |
+          docker buildx build --push \
+            --platform=linux/arm64/v8,linux/amd64 \
+            --build-arg="ALPINE_VERSION=3.16" \
+            --build-arg="PHP_VERSION=8.0" \
+            --build-arg="PHP_NUMBER=8" \
+            --tag adityadarma/alpine-php-nginx:8.0 .
+        run: |
+          docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
+          --build-arg="ALPINE_VERSION=3.17" \
+          --build-arg="PHP_VERSION=8.1" \
+          --build-arg="PHP_NUMBER=81" \
+          --tag adityadarma/alpine-php-nginx:8.1 .
+        run: |
+          docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
+          --build-arg="ALPINE_VERSION=3.18" \
+          --build-arg="PHP_VERSION=8.2" \
+          --build-arg="PHP_NUMBER=82" \
+          --tag adityadarma/alpine-php-nginx:8.2 .
+        run: |
+          docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
+          --build-arg="ALPINE_VERSION=3.19" \
+          --build-arg="PHP_VERSION=8.3" \
+          --build-arg="PHP_NUMBER=83" \
+          --tag adityadarma/alpine-php-nginx:8.3 .
+        run: |
+          docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
+          --build-arg="ALPINE_VERSION=3.15" \
+          --build-arg="PHP_VERSION=7.4" \
+          --build-arg="PHP_NUMBER=7" \
+          --build-arg="ENVIROMENT=laravel" \
+          --tag adityadarma/alpine-php-nginx:7.4-laravel .
+        run: |
+          docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
+          --build-arg="ALPINE_VERSION=3.17" \
+          --build-arg="PHP_VERSION=8.1" \
+          --build-arg="PHP_NUMBER=81" \
+          --build-arg="ENVIROMENT=laravel" \
+          --tag adityadarma/alpine-php-nginx:8.1-laravel .
+        run: |
+          docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
+          --build-arg="ALPINE_VERSION=3.19" \
+          --build-arg="PHP_VERSION=8.3" \
+          --build-arg="PHP_NUMBER=83" \
+          --build-arg="ENVIROMENT=laravel" \
+          --tag adityadarma/alpine-php-nginx:8.3-laravel .
