@@ -2,7 +2,7 @@ name: Docker Alpine Linux Lightweight
 
 on:
   push:
-    branches: master
+    branches: main
 
 jobs:
   build:
