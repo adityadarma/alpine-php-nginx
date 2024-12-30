@@ -21,41 +21,44 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       - name: build the image
-        uses: docker/build-push-action@v3
-        with:
-          platforms: linux/amd64,linux/arm64/v8
         run: |
           docker buildx build --push \
+            --platform=linux/arm64/v8,linux/amd64 \
             --build-arg="ALPINE_VERSION=3.15" \
             --build-arg="PHP_VERSION=7.4" \
             --build-arg="PHP_NUMBER=7" \
             --tag adityadarma/alpine-php-nginx:7.4 . \
           && \
           docker buildx build --push \
+            --platform=linux/arm64/v8,linux/amd64 \
             --build-arg="ALPINE_VERSION=3.16" \
             --build-arg="PHP_VERSION=8.0" \
             --build-arg="PHP_NUMBER=8" \
             --tag adityadarma/alpine-php-nginx:8.0 . \
           && \
           docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
           --build-arg="ALPINE_VERSION=3.17" \
           --build-arg="PHP_VERSION=8.1" \
           --build-arg="PHP_NUMBER=81" \
           --tag adityadarma/alpine-php-nginx:8.1 . \
           && \
           docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
           --build-arg="ALPINE_VERSION=3.18" \
           --build-arg="PHP_VERSION=8.2" \
           --build-arg="PHP_NUMBER=82" \
           --tag adityadarma/alpine-php-nginx:8.2 . \
           && \
           docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
           --build-arg="ALPINE_VERSION=3.19" \
           --build-arg="PHP_VERSION=8.3" \
           --build-arg="PHP_NUMBER=83" \
           --tag adityadarma/alpine-php-nginx:8.3 . \
           && \
           docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
           --build-arg="ALPINE_VERSION=3.15" \
           --build-arg="PHP_VERSION=7.4" \
           --build-arg="PHP_NUMBER=7" \
@@ -63,6 +66,7 @@ jobs:
           --tag adityadarma/alpine-php-nginx:7.4-laravel . \
           && \
           docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
           --build-arg="ALPINE_VERSION=3.17" \
           --build-arg="PHP_VERSION=8.1" \
           --build-arg="PHP_NUMBER=81" \
@@ -70,6 +74,7 @@ jobs:
           --tag adityadarma/alpine-php-nginx:8.1-laravel . \
           && \
           docker buildx build --push \
+          --platform=linux/arm64/v8,linux/amd64 \
           --build-arg="ALPINE_VERSION=3.19" \
           --build-arg="PHP_VERSION=8.3" \
           --build-arg="PHP_NUMBER=83" \
