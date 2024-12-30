@@ -81,10 +81,17 @@ jobs:
 
       - name: Build and push Docker image
         run: |
+          # Set environment-specific build argument if defined
+          EXTRA_ARGS=""
+          if [ "${{ matrix.environment }}" != "" ]; then
+            EXTRA_ARGS="--build-arg ENVIROMENT=${{ matrix.environment }}"
+          fi
+
+          # Build and push the image
           docker buildx build --push \
             --platform=linux/arm64/v8,linux/amd64 \
             --build-arg="ALPINE_VERSION=${{ matrix.alpine_version }}" \
             --build-arg="PHP_VERSION=${{ matrix.php_version }}" \
             --build-arg="PHP_NUMBER=${{ matrix.php_number }}" \
-            ${{ matrix.environment && "--build-arg ENVIROMENT=${{ matrix.environment }}" || "" }} \
+            $EXTRA_ARGS \
             --tag adityadarma/alpine-php-nginx:${{ matrix.tag_suffix }} .
