@@ -2,81 +2,89 @@ name: Docker Alpine Linux Lightweight
 
 on:
   push:
-    branches: build
+    branches: [build]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          # Define all combinations of Alpine and PHP versions
+          - alpine_version: "3.15"
+            php_version: "7.4"
+            php_number: "7"
+            tag_suffix: "7.4"
+
+          - alpine_version: "3.16"
+            php_version: "8.0"
+            php_number: "8"
+            tag_suffix: "8.0"
+
+          - alpine_version: "3.19"
+            php_version: "8.1"
+            php_number: "81"
+            tag_suffix: "8.1"
+
+          - alpine_version: "3.21"
+            php_version: "8.2"
+            php_number: "82"
+            tag_suffix: "8.2"
+
+          - alpine_version: "3.21"
+            php_version: "8.3"
+            php_number: "83"
+            tag_suffix: "8.3"
+
+          - alpine_version: "3.21"
+            php_version: "8.4"
+            php_number: "84"
+            tag_suffix: "8.4"
+
+          # Laravel-specific builds
+          - alpine_version: "3.15"
+            php_version: "7.4"
+            php_number: "7"
+            tag_suffix: "7.4-laravel"
+            environment: "laravel"
+
+          - alpine_version: "3.21"
+            php_version: "8.1"
+            php_number: "81"
+            tag_suffix: "8.1-laravel"
+            environment: "laravel"
+
+          - alpine_version: "3.21"
+            php_version: "8.3"
+            php_number: "83"
+            tag_suffix: "8.3-laravel"
+            environment: "laravel"
+            
+          - alpine_version: "3.21"
+            php_version: "8.4"
+            php_number: "84"
+            tag_suffix: "8.4-laravel"
+            environment: "laravel"
+
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v2
-      - name: install buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
-        with:
-          buildx-version: latest
-      - name: login to docker hub
+
+      - name: Install buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: build the image
+
+      - name: Build and push Docker image
         run: |
           docker buildx build --push \
             --platform=linux/arm64/v8,linux/amd64 \
-            --build-arg="ALPINE_VERSION=3.15" \
-            --build-arg="PHP_VERSION=7.4" \
-            --build-arg="PHP_NUMBER=7" \
-            --tag adityadarma/alpine-php-nginx:7.4 . \
-          && \
-          docker buildx build --push \
-            --platform=linux/arm64/v8,linux/amd64 \
-            --build-arg="ALPINE_VERSION=3.16" \
-            --build-arg="PHP_VERSION=8.0" \
-            --build-arg="PHP_NUMBER=8" \
-            --tag adityadarma/alpine-php-nginx:8.0 . \
-          && \
-          docker buildx build --push \
-          --platform=linux/arm64/v8,linux/amd64 \
-          --build-arg="ALPINE_VERSION=3.17" \
-          --build-arg="PHP_VERSION=8.1" \
-          --build-arg="PHP_NUMBER=81" \
-          --tag adityadarma/alpine-php-nginx:8.1 . \
-          && \
-          docker buildx build --push \
-          --platform=linux/arm64/v8,linux/amd64 \
-          --build-arg="ALPINE_VERSION=3.18" \
-          --build-arg="PHP_VERSION=8.2" \
-          --build-arg="PHP_NUMBER=82" \
-          --tag adityadarma/alpine-php-nginx:8.2 . \
-          && \
-          docker buildx build --push \
-          --platform=linux/arm64/v8,linux/amd64 \
-          --build-arg="ALPINE_VERSION=3.19" \
-          --build-arg="PHP_VERSION=8.3" \
-          --build-arg="PHP_NUMBER=83" \
-          --tag adityadarma/alpine-php-nginx:8.3 . \
-          && \
-          docker buildx build --push \
-          --platform=linux/arm64/v8,linux/amd64 \
-          --build-arg="ALPINE_VERSION=3.15" \
-          --build-arg="PHP_VERSION=7.4" \
-          --build-arg="PHP_NUMBER=7" \
-          --build-arg="ENVIROMENT=laravel" \
-          --tag adityadarma/alpine-php-nginx:7.4-laravel . \
-          && \
-          docker buildx build --push \
-          --platform=linux/arm64/v8,linux/amd64 \
-          --build-arg="ALPINE_VERSION=3.17" \
-          --build-arg="PHP_VERSION=8.1" \
-          --build-arg="PHP_NUMBER=81" \
-          --build-arg="ENVIROMENT=laravel" \
-          --tag adityadarma/alpine-php-nginx:8.1-laravel . \
-          && \
-          docker buildx build --push \
-          --platform=linux/arm64/v8,linux/amd64 \
-          --build-arg="ALPINE_VERSION=3.19" \
-          --build-arg="PHP_VERSION=8.3" \
-          --build-arg="PHP_NUMBER=83" \
-          --build-arg="ENVIROMENT=laravel" \
-          --tag adityadarma/alpine-php-nginx:8.3-laravel .
+            --build-arg="ALPINE_VERSION=${{ matrix.alpine_version }}" \
+            --build-arg="PHP_VERSION=${{ matrix.php_version }}" \
+            --build-arg="PHP_NUMBER=${{ matrix.php_number }}" \
+            ${{ matrix.environment && "--build-arg ENVIROMENT=${{ matrix.environment }}" || "" }} \
+            --tag adityadarma/alpine-php-nginx:${{ matrix.tag_suffix }} .
