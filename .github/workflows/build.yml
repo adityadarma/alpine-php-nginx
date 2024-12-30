@@ -26,20 +26,15 @@ jobs:
             php_number: "81"
             tag_suffix: "8.1"
 
-          - alpine_version: "3.21"
+          - alpine_version: "3.20"
             php_version: "8.2"
             php_number: "82"
             tag_suffix: "8.2"
 
-          - alpine_version: "3.21"
+          - alpine_version: "3.20"
             php_version: "8.3"
             php_number: "83"
             tag_suffix: "8.3"
-
-          - alpine_version: "3.21"
-            php_version: "8.4"
-            php_number: "84"
-            tag_suffix: "8.4"
 
           # Laravel-specific builds
           - alpine_version: "3.15"
@@ -54,16 +49,10 @@ jobs:
             tag_suffix: "8.1-laravel"
             environment: "laravel"
 
-          - alpine_version: "3.21"
+          - alpine_version: "3.20"
             php_version: "8.3"
             php_number: "83"
             tag_suffix: "8.3-laravel"
-            environment: "laravel"
-            
-          - alpine_version: "3.21"
-            php_version: "8.4"
-            php_number: "84"
-            tag_suffix: "8.4-laravel"
             environment: "laravel"
 
     steps:
