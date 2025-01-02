@@ -7,10 +7,10 @@ ARG PHP_NUMBER
 ARG ENVIROMENT=general
 
 # Set label information
-LABEL Maintainer="Aditya Darma <adhit.boys1@gmail.com>"
-LABEL Description="Lightweight Image for development."
-LABEL OS Version="Alpine Linux ${ALPINE_VERSION}"
-LABEL PHP Version="${PHP_VERSION}"
+LABEL org.opencontainers.image.maintainer="Aditya Darma <adhit.boys1@gmail.com>"
+LABEL org.opencontainers.image.description="Lightweight Image for development."
+LABEL org.opencontainers.image.os="Alpine Linux ${ALPINE_VERSION}"
+LABEL org.opencontainers.image.php="${PHP_VERSION}"
 
 # Install package
 RUN apk add --update --no-cache \

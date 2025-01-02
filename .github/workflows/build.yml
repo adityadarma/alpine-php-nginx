@@ -89,7 +89,7 @@ jobs:
 
           # Build and push the image
           docker buildx build --push \
-            --platform=linux/arm64/v8,linux/amd64 \
+            --platform=linux/arm64/v8,linux/amd64,linux/s390x \
             --build-arg="ALPINE_VERSION=${{ matrix.alpine_version }}" \
             --build-arg="PHP_VERSION=${{ matrix.php_version }}" \
             --build-arg="PHP_NUMBER=${{ matrix.php_number }}" \
