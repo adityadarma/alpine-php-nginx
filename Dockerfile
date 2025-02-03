@@ -5,6 +5,7 @@ FROM alpine:${ALPINE_VERSION}
 ARG PHP_VERSION
 ARG PHP_NUMBER
 ARG ENVIROMENT=general
+ARG VARIANT=full
 
 # Set label information
 LABEL org.opencontainers.image.maintainer="Aditya Darma <adhit.boys1@gmail.com>"
@@ -13,41 +14,51 @@ LABEL org.opencontainers.image.os="Alpine Linux ${ALPINE_VERSION}"
 LABEL org.opencontainers.image.php="${PHP_VERSION}"
 
 # Install package
-RUN apk add --update --no-cache \
-    curl \
-    git \
+RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
     nano \
     nginx \
     supervisor \
-    mysql-client \
     php${PHP_NUMBER} \
-    php${PHP_NUMBER}-bcmath \
-    php${PHP_NUMBER}-ctype \
     php${PHP_NUMBER}-curl \
+    php${PHP_NUMBER}-ctype \
     php${PHP_NUMBER}-dom \
-    php${PHP_NUMBER}-exif \
     php${PHP_NUMBER}-fileinfo \
     php${PHP_NUMBER}-fpm \
-    php${PHP_NUMBER}-gd \
-    php${PHP_NUMBER}-iconv \
     php${PHP_NUMBER}-json \
     php${PHP_NUMBER}-mbstring \
-    php${PHP_NUMBER}-mysqli \
     php${PHP_NUMBER}-opcache \
     php${PHP_NUMBER}-openssl \
-    php${PHP_NUMBER}-pdo_mysql \
-    php${PHP_NUMBER}-pdo_pgsql \
-    php${PHP_NUMBER}-pdo_sqlite \
-    php${PHP_NUMBER}-pecl-imagick \
-    php${PHP_NUMBER}-phar \
-    php${PHP_NUMBER}-session \
-    php${PHP_NUMBER}-simplexml \
     php${PHP_NUMBER}-tokenizer \
-    php${PHP_NUMBER}-xml \
-    php${PHP_NUMBER}-xmlreader \
-    php${PHP_NUMBER}-xmlwriter \
-    php${PHP_NUMBER}-zip \
-    php${PHP_NUMBER}-zlib \
+    && case "$VARIANT" in \
+        mini) apk add --no-cache \
+            php${PHP_NUMBER}-bcmath \
+            php${PHP_NUMBER}-iconv \
+            php${PHP_NUMBER}-pdo_mysql \
+            php${PHP_NUMBER}-pdo_sqlite \
+            php${PHP_NUMBER}-phar \
+            php${PHP_NUMBER}-session ;; \
+        full) apk add --no-cache \
+            curl \
+            git \
+            mysql-client \
+            php${PHP_NUMBER}-bcmath \
+            php${PHP_NUMBER}-exif \
+            php${PHP_NUMBER}-gd \
+            php${PHP_NUMBER}-iconv \
+            php${PHP_NUMBER}-mysqli \
+            php${PHP_NUMBER}-pdo_mysql \
+            php${PHP_NUMBER}-pdo_pgsql \
+            php${PHP_NUMBER}-pdo_sqlite \
+            php${PHP_NUMBER}-pecl-imagick \
+            php${PHP_NUMBER}-phar \
+            php${PHP_NUMBER}-session \
+            php${PHP_NUMBER}-simplexml \
+            php${PHP_NUMBER}-xml \
+            php${PHP_NUMBER}-xmlreader \
+            php${PHP_NUMBER}-xmlwriter \
+            php${PHP_NUMBER}-zip \
+            php${PHP_NUMBER}-zlib ;; \
+    esac \
     && rm -rf /var/cache/apk/*
 
 # Symlink if not found
