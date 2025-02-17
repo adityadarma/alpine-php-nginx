@@ -6,6 +6,7 @@ ARG PHP_VERSION
 ARG PHP_NUMBER
 ARG ENVIROMENT=general
 ARG VARIANT=full
+ENV VALIDATE_TIMESTAMPS=1
 
 # Set label information
 LABEL org.opencontainers.image.maintainer="Aditya Darma <adhit.boys1@gmail.com>"
@@ -15,6 +16,8 @@ LABEL org.opencontainers.image.php="${PHP_VERSION}"
 
 # Install package
 RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
+    curl \
+    git \
     nano \
     nginx \
     supervisor \
@@ -38,8 +41,6 @@ RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
             php${PHP_NUMBER}-phar \
             php${PHP_NUMBER}-session ;; \
         full) apk add --no-cache \
-            curl \
-            git \
             mysql-client \
             php${PHP_NUMBER}-bcmath \
             php${PHP_NUMBER}-exif \
@@ -82,11 +83,15 @@ WORKDIR /app
 # Make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN chown -R nobody:nogroup /app /run /var/lib/nginx /var/log/nginx
 
+# Copy file entrypoint to container
+COPY custom/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Switch to use a non-root user from here on
 USER nobody
 
 # Expose the port nginx is reachable on
 EXPOSE 8000
 
-# Let supervisord start nginx & php-fpm
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+# Start entrypoint
+ENTRYPOINT ["/entrypoint.sh"]

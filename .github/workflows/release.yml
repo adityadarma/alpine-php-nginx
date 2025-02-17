@@ -1,4 +1,4 @@
-name: Docker Alpine Linux Lightweight
+name: release
 
 on:
   workflow_dispatch:
