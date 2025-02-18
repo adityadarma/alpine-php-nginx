@@ -45,6 +45,12 @@
 - --build-arg ENVIROMENT=laravel (default=general)
 - --build-arg VARIANT=mini (default=full)
 
+## Custom Enviroment
+- VALIDATE_TIMESTAMPS (default=1)
+- REVALIDATE_FREQ (default=2)
+- WITH_QUEUE (default=false)
+- WITH_SCHEDULE (default=false)
+
 ## Build Manual
 - docker build --build-arg ALPINE_VERSION=3.15 --build-arg PHP_VERSION=7.4 --build-arg PHP_NUMBER=7 -t adityadarma/alpine-php-nginx:7.4 -f Dockerfile .
 - docker build --build-arg ALPINE_VERSION=3.15 --build-arg PHP_VERSION=7.4 --build-arg PHP_NUMBER=7 --build-arg ENVIROMENT=laravel -t adityadarma/alpine-php-nginx:7.4-laravel -f Dockerfile .

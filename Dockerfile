@@ -6,7 +6,11 @@ ARG PHP_VERSION
 ARG PHP_NUMBER
 ARG ENVIROMENT=general
 ARG VARIANT=full
+
 ENV VALIDATE_TIMESTAMPS=1
+ENV REVALIDATE_FREQ=2
+ENV WITH_QUEUE=false
+ENV WITH_SCHEDULE=false
 
 # Set label information
 LABEL org.opencontainers.image.maintainer="Aditya Darma <adhit.boys1@gmail.com>"
@@ -21,6 +25,7 @@ RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
     nano \
     nginx \
     supervisor \
+    gettext \
     php${PHP_NUMBER} \
     php${PHP_NUMBER}-curl \
     php${PHP_NUMBER}-ctype \
@@ -72,16 +77,14 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 COPY custom/www.conf /etc/php${PHP_NUMBER}/php-fpm.d/www.conf
 COPY custom/php-custom.ini /etc/php${PHP_NUMBER}/conf.d/custom.ini
 COPY custom/nginx.conf /etc/nginx/nginx.conf
-COPY custom/supervisord-${ENVIROMENT}.conf /etc/supervisord.conf
-
-# Replace string
-RUN sed -i "s|command=php-fpm\${PHP_NUMBER} -F|command=php-fpm${PHP_NUMBER} -F|g" /etc/supervisord.conf
+COPY custom/supervisord.conf.template /etc/supervisord.conf.template
 
 # Setup document root for application
 WORKDIR /app
 
-# Make sure files/folders needed by the processes are accessable when they run under the nobody user
-RUN chown -R nobody:nogroup /app /run /var/lib/nginx /var/log/nginx
+# Replace string and make sure files/folders needed by the processes are accessable when they run under the nobody user
+RUN sed -i "s|command=php-fpm -F|command=php-fpm${PHP_NUMBER} -F|g" /etc/supervisord.conf.template && \
+    chown -R nobody:nogroup /app /run /var/lib/nginx /var/log/nginx /etc/supervisord.conf 
 
 # Copy file entrypoint to container
 COPY custom/entrypoint.sh /entrypoint.sh

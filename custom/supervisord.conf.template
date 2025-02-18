@@ -5,7 +5,7 @@ logfile_maxbytes=0
 pidfile=/run/supervisord.pid
 
 [program:php-fpm]
-command=php-fpm${PHP_NUMBER} -F
+command=php-fpm -F
 autostart=true
 autorestart=true
 startretries=0
@@ -20,14 +20,14 @@ priority=10
 
 [program:laravel-queue]
 command=/usr/bin/php /app/artisan queue:work
-autostart=true
+autostart=${WITH_QUEUE}
 autorestart=true
 startretries=0
 priority=15
 
 [program:laravel-schedule]
 command=/usr/bin/php /app/artisan schedule:work
-autostart=true
+autostart=${WITH_SCHEDULE}
 autorestart=true
 startretries=0
 priority=20
