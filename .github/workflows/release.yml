@@ -60,52 +60,6 @@ jobs:
             variant: "mini"
             tag_suffix: "mini-8.4"
 
-          # Laravel-specific builds
-          - alpine_version: "3.15"
-            php_version: "7.4"
-            php_number: "7"
-            tag_suffix: "7.4-laravel"
-            environment: "laravel"
-
-          - alpine_version: "3.19"
-            php_version: "8.1"
-            php_number: "81"
-            tag_suffix: "8.1-laravel"
-            environment: "laravel"
-
-          - alpine_version: "3.19"
-            php_version: "8.1"
-            php_number: "81"
-            variant: "mini"
-            tag_suffix: "mini-8.1-laravel"
-            environment: "laravel"
-
-          - alpine_version: "3.20"
-            php_version: "8.3"
-            php_number: "83"
-            tag_suffix: "8.3-laravel"
-            environment: "laravel"
-
-          - alpine_version: "3.20"
-            php_version: "8.3"
-            php_number: "83"
-            variant: "mini"
-            tag_suffix: "mini-8.3-laravel"
-            environment: "laravel"
-
-          - alpine_version: "3.21"
-            php_version: "8.4"
-            php_number: "84"
-            tag_suffix: "8.4-laravel"
-            environment: "laravel"
-
-          - alpine_version: "3.21"
-            php_version: "8.4"
-            php_number: "84"
-            variant: "mini"
-            tag_suffix: "mini-8.4-laravel"
-            environment: "laravel"
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -122,11 +76,7 @@ jobs:
       - name: Build and push Docker image
         run: |
           # Set environment-specific build argument if defined
-          ENVIROMENT_ARGS=""
           VARIANT_ARGS=""
-          if [ "${{ matrix.environment }}" != "" ]; then
-            ENVIROMENT_ARGS="--build-arg ENVIROMENT=${{ matrix.environment }}"
-          fi
           if [ "${{ matrix.variant }}" != "" ]; then
             VARIANT_ARGS="--build-arg VARIANT=${{ matrix.variant }}"
           fi
