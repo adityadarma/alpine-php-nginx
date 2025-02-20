@@ -15,7 +15,7 @@ ENV WITH_SCHEDULE=false
 
 # Set label information
 LABEL org.opencontainers.image.maintainer="Aditya Darma <adhit.boys1@gmail.com>"
-LABEL org.opencontainers.image.description="Lightweight Image for development."
+LABEL org.opencontainers.image.description="Lightweight Image for PHP."
 LABEL org.opencontainers.image.os="Alpine Linux ${ALPINE_VERSION}"
 LABEL org.opencontainers.image.php="${PHP_VERSION}"
 
@@ -76,7 +76,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Copy file configurator
 COPY custom/www.conf /etc/php${PHP_NUMBER}/php-fpm.d/www.conf
-COPY custom/php-custom.ini /etc/php${PHP_NUMBER}/conf.d/custom.ini
+COPY custom/php.ini /etc/php${PHP_NUMBER}/conf.d/custom.ini
 COPY custom/nginx.conf /etc/nginx/nginx.conf
 COPY custom/supervisord.conf.template /etc/supervisord.conf.template
 
