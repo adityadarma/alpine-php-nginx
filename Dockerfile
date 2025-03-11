@@ -9,7 +9,7 @@ ARG VARIANT=full
 
 ENV VALIDATE_TIMESTAMPS=1
 ENV REVALIDATE_FREQ=2
-ENV TIMEZONE="UTC"
+ENV TZ="UTC"
 ENV WITH_QUEUE=false
 ENV WITH_SCHEDULE=false
 
@@ -21,6 +21,7 @@ LABEL org.opencontainers.image.php="${PHP_VERSION}"
 
 # Install package
 RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
+    tzdata \
     curl \
     git \
     nano \
