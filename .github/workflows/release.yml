@@ -15,6 +15,12 @@ jobs:
             php_number: "7"
             tag_suffix: "7.4"
 
+          - alpine_version: "3.15"
+            php_version: "7.4"
+            php_number: "7"
+            variant: "mini"
+            tag_suffix: "mini-7.4"
+
           - alpine_version: "3.16"
             php_version: "8.0"
             php_number: "8"
