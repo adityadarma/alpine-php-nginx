@@ -37,28 +37,28 @@ jobs:
             variant: "mini"
             tag_suffix: "mini-8.1"
 
-          - alpine_version: "3.20"
+          - alpine_version: "3.22"
             php_version: "8.2"
             php_number: "82"
             tag_suffix: "8.2"
 
-          - alpine_version: "3.20"
+          - alpine_version: "3.22"
             php_version: "8.3"
             php_number: "83"
             tag_suffix: "8.3"
 
-          - alpine_version: "3.20"
+          - alpine_version: "3.22"
             php_version: "8.3"
             php_number: "83"
             variant: "mini"
             tag_suffix: "mini-8.3"
 
-          - alpine_version: "3.21"
+          - alpine_version: "3.22"
             php_version: "8.4"
             php_number: "84"
             tag_suffix: "8.4"
 
-          - alpine_version: "3.21"
+          - alpine_version: "3.22"
             php_version: "8.4"
             php_number: "84"
             variant: "mini"
