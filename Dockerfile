@@ -53,8 +53,6 @@ RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
     && case "$VARIANT" in \
         mini) apk add --no-cache ;; \
         node) apk add --no-cache \
-            mysql-client \
-            postgresql-client \
             php${PHP_NUMBER}-exif \
             php${PHP_NUMBER}-gd \
             php${PHP_NUMBER}-pdo_pgsql \
@@ -68,8 +66,6 @@ RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
             nodejs \
             npm ;; \
         full) apk add --no-cache \
-            mysql-client \
-            postgresql-client \
             php${PHP_NUMBER}-exif \
             php${PHP_NUMBER}-gd \
             php${PHP_NUMBER}-pdo_pgsql \
