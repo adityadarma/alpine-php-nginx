@@ -1,0 +1,5 @@
+# Crontab file for user nobody
+# Format: minute hour day month day-of-week command
+
+# Run logrotate every 00:00
+0 0 * * * /usr/sbin/logrotate /etc/logrotate.d/nginx

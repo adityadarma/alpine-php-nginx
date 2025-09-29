@@ -5,6 +5,8 @@
 - curl
 - gettext
 - git
+- logrotate
+- supercronic
 - nano
 - nginx
 - supervisor
@@ -57,6 +59,7 @@
 - WITH_QUEUE (default=false)
 - WITH_SCHEDULE (default=false)
 - WITH_VITE (default=false)
+- WITH_CRON (default=false)
 - MAX_BODY_SIZE (default=50m)
 - MAX_TIMEOUT (default=120)
 

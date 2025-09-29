@@ -13,6 +13,7 @@ ENV TZ=UTC
 ENV WITH_QUEUE=false
 ENV WITH_SCHEDULE=false
 ENV WITH_VITE=false
+ENV WITH_CRON=false
 ENV MAX_BODY_SIZE=50m
 ENV MAX_TIMEOUT=120
 
@@ -28,9 +29,11 @@ RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
     curl \
     gettext \
     git \
+    logrotate \
     nano \
     nginx \
     supervisor \
+    supercronic \
     tzdata \
     php${PHP_NUMBER} \
     php${PHP_NUMBER}-bcmath \
@@ -89,6 +92,8 @@ COPY custom/php.ini /etc/php${PHP_NUMBER}/conf.d/custom.ini
 COPY custom/nginx.conf /etc/nginx/nginx.conf.template
 COPY custom/supervisord.conf /etc/supervisord.conf.template
 COPY custom/entrypoint.sh /entrypoint.sh
+COPY custom/crontab /etc/crontab-nobody
+COPY custom/nginx-logrotate.conf /etc/logrotate.d/nginx
 
 # Setup document root for application
 WORKDIR /app
@@ -96,8 +101,9 @@ WORKDIR /app
 # Replace string and make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN sed -i "s|command=php-fpm -F|command=php-fpm${PHP_NUMBER} -F|g" /etc/supervisord.conf.template && \
     mkdir -p /home/nobody && \
-    chown -R nobody:nogroup /home/nobody /app /run /var/lib/nginx /var/log/nginx /etc/supervisord.conf /etc/nginx/nginx.conf && \
+    chown -R nobody:nogroup /home/nobody /app /run /var/lib/nginx /var/log/nginx /etc/supervisord.conf /etc/nginx/nginx.conf /etc/logrotate.d /etc/crontab-nobody && \
     chmod +x /entrypoint.sh && \
+    chmod -R 755 /var/log/nginx && \
     git config --system --add safe.directory /app
 
 # Switch to use a non-root user from here on
