@@ -7,6 +7,7 @@ ARG PHP_NUMBER
 ARG VARIANT=full
 
 ENV HOME=/home/nobody
+ENV PHP_NUMBER=${PHP_NUMBER}
 ENV VALIDATE_TIMESTAMPS=1
 ENV REVALIDATE_FREQ=2
 ENV TZ=UTC
@@ -88,7 +89,7 @@ COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Copy file configurator
 COPY custom/www.conf /etc/php${PHP_NUMBER}/php-fpm.d/www.conf
-COPY custom/php.ini /etc/php${PHP_NUMBER}/conf.d/custom.ini
+COPY custom/php.ini /etc/php-ini.template
 COPY custom/nginx.conf /etc/nginx/nginx.conf.template
 COPY custom/supervisord.conf /etc/supervisord.conf.template
 COPY custom/entrypoint.sh /entrypoint.sh
@@ -100,8 +101,9 @@ WORKDIR /app
 
 # Replace string and make sure files/folders needed by the processes are accessable when they run under the nobody user
 RUN sed -i "s|command=php-fpm -F|command=php-fpm${PHP_NUMBER} -F|g" /etc/supervisord.conf.template && \
-    mkdir -p /home/nobody && \
-    chown -R nobody:nogroup /home/nobody /app /run /var/lib/nginx /var/log/nginx /etc/supervisord.conf /etc/nginx/nginx.conf /etc/logrotate.d /etc/crontab-nobody && \
+    mkdir -p /home/nobody /etc/php${PHP_NUMBER}/conf.d && \
+    touch /etc/php${PHP_NUMBER}/conf.d/custom.ini && \
+    chown -R nobody:nogroup /home/nobody /app /run /var/lib/nginx /var/log/nginx /etc/supervisord.conf /etc/nginx/nginx.conf /etc/logrotate.d /etc/crontab-nobody /etc/php-ini.template /etc/php${PHP_NUMBER}/conf.d/custom.ini && \
     chmod +x /entrypoint.sh && \
     chmod -R 755 /var/log/nginx && \
     git config --system --add safe.directory /app
