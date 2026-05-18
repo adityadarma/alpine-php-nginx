@@ -2,6 +2,7 @@ ARG ALPINE_VERSION=3.20
 
 FROM alpine:${ALPINE_VERSION}
 
+ARG ALPINE_VERSION
 ARG PHP_VERSION
 ARG PHP_NUMBER
 ARG VARIANT=full
@@ -25,37 +26,48 @@ LABEL org.opencontainers.image.os="Alpine Linux ${ALPINE_VERSION}"
 LABEL org.opencontainers.image.php="${PHP_VERSION}"
 
 # Install package
-RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
-    bash \
-    curl \
-    gettext \
-    git \
-    logrotate \
-    nano \
-    nginx \
-    supervisor \
-    supercronic \
-    tzdata \
-    php${PHP_NUMBER} \
-    php${PHP_NUMBER}-bcmath \
-    php${PHP_NUMBER}-curl \
-    php${PHP_NUMBER}-ctype \
-    php${PHP_NUMBER}-dom \
-    php${PHP_NUMBER}-fileinfo \
-    php${PHP_NUMBER}-fpm \
-    php${PHP_NUMBER}-iconv \
-    php${PHP_NUMBER}-json \
-    php${PHP_NUMBER}-mbstring \
-    php${PHP_NUMBER}-mysqli \
-    php${PHP_NUMBER}-opcache \
-    php${PHP_NUMBER}-openssl \
-    php${PHP_NUMBER}-pdo_mysql \
-    php${PHP_NUMBER}-pdo_sqlite \
-    php${PHP_NUMBER}-phar \
-    php${PHP_NUMBER}-session \
-    php${PHP_NUMBER}-tokenizer \
+# apk_install: install only packages that exist in the repo (forward-compatible).
+RUN echo "VARIANT=${VARIANT}" \
+    && apk update \
+    && apk_install() { \
+         PKGS=""; \
+         for pkg in "$@"; do \
+           apk search --exact "$pkg" | grep -q "^${pkg}-" && PKGS="$PKGS $pkg"; \
+         done; \
+         [ -n "$PKGS" ] && apk add --no-cache $PKGS || true; \
+       } \
+    && apk add --no-cache \
+        bash \
+        curl \
+        gettext \
+        git \
+        logrotate \
+        nano \
+        nginx \
+        supervisor \
+        supercronic \
+        tzdata \
+        php${PHP_NUMBER} \
+        php${PHP_NUMBER}-bcmath \
+        php${PHP_NUMBER}-curl \
+        php${PHP_NUMBER}-ctype \
+        php${PHP_NUMBER}-dom \
+        php${PHP_NUMBER}-fileinfo \
+        php${PHP_NUMBER}-fpm \
+        php${PHP_NUMBER}-mbstring \
+        php${PHP_NUMBER}-mysqli \
+        php${PHP_NUMBER}-openssl \
+        php${PHP_NUMBER}-pdo_mysql \
+        php${PHP_NUMBER}-pdo_sqlite \
+        php${PHP_NUMBER}-phar \
+        php${PHP_NUMBER}-session \
+        php${PHP_NUMBER}-tokenizer \
+    && apk_install \
+        php${PHP_NUMBER}-json \
+        php${PHP_NUMBER}-iconv \
+        php${PHP_NUMBER}-opcache \
     && case "$VARIANT" in \
-        mini) apk add --no-cache ;; \
+        mini) ;; \
         node) apk add --no-cache \
             php${PHP_NUMBER}-exif \
             php${PHP_NUMBER}-gd \
@@ -66,9 +78,9 @@ RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
             php${PHP_NUMBER}-xmlreader \
             php${PHP_NUMBER}-xmlwriter \
             php${PHP_NUMBER}-zip \
-            php${PHP_NUMBER}-zlib \
             nodejs \
-            npm ;; \
+            npm \
+            && apk_install php${PHP_NUMBER}-zlib ;; \
         full) apk add --no-cache \
             php${PHP_NUMBER}-exif \
             php${PHP_NUMBER}-gd \
@@ -79,7 +91,7 @@ RUN echo "VARIANT=${VARIANT}" && apk add --update --no-cache \
             php${PHP_NUMBER}-xmlreader \
             php${PHP_NUMBER}-xmlwriter \
             php${PHP_NUMBER}-zip \
-            php${PHP_NUMBER}-zlib ;; \
+            && apk_install php${PHP_NUMBER}-zlib ;; \
     esac \
     && rm -rf /var/cache/apk/* \
     && if [ ! -e /usr/bin/php ]; then ln -s /usr/bin/php${PHP_NUMBER} /usr/bin/php; fi
