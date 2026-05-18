@@ -37,44 +37,61 @@ jobs:
             variant: "mini"
             tag_suffix: "8.1-mini"
 
-          - alpine_version: "3.22"
+          - alpine_version: "3.21"
             php_version: "8.2"
             php_number: "82"
             tag_suffix: "8.2"
 
-          - alpine_version: "3.22"
+          - alpine_version: "3.23"
             php_version: "8.3"
             php_number: "83"
             tag_suffix: "8.3"
 
-          - alpine_version: "3.22"
+          - alpine_version: "3.23"
             php_version: "8.3"
             php_number: "83"
             variant: "mini"
             tag_suffix: "8.3-mini"
 
-          - alpine_version: "3.22"
+          - alpine_version: "3.23"
             php_version: "8.3"
             php_number: "83"
             variant: "node"
             tag_suffix: "8.3-node"
 
-          - alpine_version: "3.22"
+          - alpine_version: "3.23"
             php_version: "8.4"
             php_number: "84"
             tag_suffix: "8.4"
 
-          - alpine_version: "3.22"
+          - alpine_version: "3.23"
             php_version: "8.4"
             php_number: "84"
             variant: "mini"
             tag_suffix: "8.4-mini"
 
-          - alpine_version: "3.22"
+          - alpine_version: "3.23"
             php_version: "8.4"
             php_number: "84"
             variant: "node"
             tag_suffix: "8.4-node"
+
+          - alpine_version: "3.23"
+            php_version: "8.5"
+            php_number: "85"
+            tag_suffix: "8.5"
+
+          - alpine_version: "3.23"
+            php_version: "8.5"
+            php_number: "85"
+            variant: "mini"
+            tag_suffix: "8.5-mini"
+
+          - alpine_version: "3.23"
+            php_version: "8.5"
+            php_number: "85"
+            variant: "node"
+            tag_suffix: "8.5-node"
 
     steps:
       - name: Checkout code

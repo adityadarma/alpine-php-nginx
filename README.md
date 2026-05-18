@@ -65,19 +65,24 @@
 
 ## Build Manual
 - docker build --build-arg ALPINE_VERSION=3.15 --build-arg PHP_VERSION=7.4 --build-arg PHP_NUMBER=7 -t adityadarma/alpine-php-nginx:7.4 -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.15 --build-arg PHP_VERSION=7.4 --build-arg PHP_NUMBER=7 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:7.4-mini -f Dockerfile .
 - docker build --build-arg ALPINE_VERSION=3.16 --build-arg PHP_VERSION=8.0 --build-arg PHP_NUMBER=8 -t adityadarma/alpine-php-nginx:8.0 -f Dockerfile .
 - docker build --build-arg ALPINE_VERSION=3.19 --build-arg PHP_VERSION=8.1 --build-arg PHP_NUMBER=81 -t adityadarma/alpine-php-nginx:8.1 -f Dockerfile .
 - docker build --build-arg ALPINE_VERSION=3.19 --build-arg PHP_VERSION=8.1 --build-arg PHP_NUMBER=81 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:8.1-mini -f Dockerfile .
-- docker build --build-arg ALPINE_VERSION=3.22 --build-arg PHP_VERSION=8.2 --build-arg PHP_NUMBER=82 -t adityadarma/alpine-php-nginx:8.2 -f Dockerfile .
-- docker build --build-arg ALPINE_VERSION=3.22 --build-arg PHP_VERSION=8.3 --build-arg PHP_NUMBER=83 -t adityadarma/alpine-php-nginx:8.3 -f Dockerfile .
-- docker build --build-arg ALPINE_VERSION=3.22 --build-arg PHP_VERSION=8.3 --build-arg PHP_NUMBER=83 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:8.3-mini -f Dockerfile .
-- docker build --build-arg ALPINE_VERSION=3.22 --build-arg PHP_VERSION=8.3 --build-arg PHP_NUMBER=83 --build-arg VARIANT=node -t adityadarma/alpine-php-nginx:8.3-node -f Dockerfile .
-- docker build --build-arg ALPINE_VERSION=3.22 --build-arg PHP_VERSION=8.4 --build-arg PHP_NUMBER=84 -t adityadarma/alpine-php-nginx:8.4 -f Dockerfile .
-- docker build --build-arg ALPINE_VERSION=3.22 --build-arg PHP_VERSION=8.4 --build-arg PHP_NUMBER=84 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:8.4-mini -f Dockerfile .
-- docker build --build-arg ALPINE_VERSION=3.22 --build-arg PHP_VERSION=8.4 --build-arg PHP_NUMBER=84 --build-arg VARIANT=node -t adityadarma/alpine-php-nginx:8.4-node -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.21 --build-arg PHP_VERSION=8.2 --build-arg PHP_NUMBER=82 -t adityadarma/alpine-php-nginx:8.2 -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.3 --build-arg PHP_NUMBER=83 -t adityadarma/alpine-php-nginx:8.3 -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.3 --build-arg PHP_NUMBER=83 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:8.3-mini -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.3 --build-arg PHP_NUMBER=83 --build-arg VARIANT=node -t adityadarma/alpine-php-nginx:8.3-node -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.4 --build-arg PHP_NUMBER=84 -t adityadarma/alpine-php-nginx:8.4 -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.4 --build-arg PHP_NUMBER=84 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:8.4-mini -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.4 --build-arg PHP_NUMBER=84 --build-arg VARIANT=node -t adityadarma/alpine-php-nginx:8.4-node -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.5 --build-arg PHP_NUMBER=85 -t adityadarma/alpine-php-nginx:8.5 -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.5 --build-arg PHP_NUMBER=85 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:8.5-mini -f Dockerfile .
+- docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.5 --build-arg PHP_NUMBER=85 --build-arg VARIANT=node -t adityadarma/alpine-php-nginx:8.5-node -f Dockerfile .
 
 ### Push to Docker Hub
 - docker push adityadarma/alpine-php-nginx:7.4
+- docker push adityadarma/alpine-php-nginx:7.4-mini
 - docker push adityadarma/alpine-php-nginx:8.0
 - docker push adityadarma/alpine-php-nginx:8.1
 - docker push adityadarma/alpine-php-nginx:8.1-mini
@@ -88,3 +93,6 @@
 - docker push adityadarma/alpine-php-nginx:8.4
 - docker push adityadarma/alpine-php-nginx:8.4-mini
 - docker push adityadarma/alpine-php-nginx:8.4-node
+- docker push adityadarma/alpine-php-nginx:8.5
+- docker push adityadarma/alpine-php-nginx:8.5-mini
+- docker push adityadarma/alpine-php-nginx:8.5-node
