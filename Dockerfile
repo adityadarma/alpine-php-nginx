@@ -62,6 +62,7 @@ RUN echo "VARIANT=${VARIANT}" \
         php${PHP_NUMBER}-phar \
         php${PHP_NUMBER}-session \
         php${PHP_NUMBER}-tokenizer \
+        php${PHP_NUMBER}-sodium \
     && apk_install \
         php${PHP_NUMBER}-json \
         php${PHP_NUMBER}-iconv \
