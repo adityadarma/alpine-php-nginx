@@ -15,7 +15,7 @@ envsubst '${JIT_BUFFER_SIZE}' < /etc/php-ini.template > /etc/php${PHP_NUMBER}/co
 
 # Change file supervisord
 envsubst < /etc/supervisord.conf.template > /etc/supervisord.conf
-envsubst '${MAX_TIMEOUT} ${MAX_BODY_SIZE}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
+envsubst '${MAX_TIMEOUT} ${MAX_BODY_SIZE} ${APP_ROOT}' < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf
 
 # Run execute supervisord command
 exec /usr/bin/supervisord -c /etc/supervisord.conf

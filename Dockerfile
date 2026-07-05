@@ -18,6 +18,7 @@ ENV WITH_VITE=false
 ENV WITH_CRON=false
 ENV MAX_BODY_SIZE=50m
 ENV MAX_TIMEOUT=120
+ENV APP_ROOT=/app/public
 
 # Set label information
 LABEL org.opencontainers.image.maintainer="Aditya Darma <adhit.boys1@gmail.com>"
