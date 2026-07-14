@@ -38,12 +38,9 @@ RUN echo "VARIANT=${VARIANT}" \
          [ -n "$PKGS" ] && apk add --no-cache $PKGS || true; \
        } \
     && apk add --no-cache \
-        bash \
         curl \
         gettext \
-        git \
         logrotate \
-        nano \
         nginx \
         supervisor \
         supercronic \
@@ -69,8 +66,15 @@ RUN echo "VARIANT=${VARIANT}" \
         php${PHP_NUMBER}-iconv \
         php${PHP_NUMBER}-opcache \
     && case "$VARIANT" in \
-        mini) ;; \
+        prod) ;; \
+        mini) apk add --no-cache \
+            bash \
+            git \
+            nano ;; \
         node) apk add --no-cache \
+            bash \
+            git \
+            nano \
             php${PHP_NUMBER}-exif \
             php${PHP_NUMBER}-gd \
             php${PHP_NUMBER}-pdo_pgsql \
@@ -84,6 +88,9 @@ RUN echo "VARIANT=${VARIANT}" \
             npm \
             && apk_install php${PHP_NUMBER}-zlib ;; \
         full) apk add --no-cache \
+            bash \
+            git \
+            nano \
             php${PHP_NUMBER}-exif \
             php${PHP_NUMBER}-gd \
             php${PHP_NUMBER}-pdo_pgsql \
@@ -120,7 +127,7 @@ RUN sed -i "s|command=php-fpm -F|command=php-fpm${PHP_NUMBER} -F|g" /etc/supervi
     chown -R nobody:nogroup /home/nobody /app /run /var/lib/nginx /var/log/nginx /etc/supervisord.conf /etc/nginx/nginx.conf /etc/logrotate.d /etc/crontab-nobody /etc/php-ini.template /etc/php${PHP_NUMBER}/conf.d/custom.ini && \
     chmod +x /entrypoint.sh && \
     chmod -R 755 /var/log/nginx && \
-    git config --system --add safe.directory /app
+    if command -v git >/dev/null 2>&1; then git config --system --add safe.directory /app; fi
 
 # Switch to use a non-root user from here on
 USER nobody

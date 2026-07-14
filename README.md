@@ -1,18 +1,20 @@
 # Docker Alpine Linux Lightweight
 
 ## General Modules
-- bash
+
+### Base (all variants, including `prod`)
 - curl
 - gettext
-- git
 - logrotate
-- supercronic
-- nano
 - nginx
+- supercronic
 - supervisor
 - tzdata
-- mysql-client (optional)
-- postgresql-client (optional)
+
+### Included in `mini`, `node`, and `full` (not `prod`)
+- bash
+- git
+- nano
 
 ## PHP Modules
 
@@ -55,12 +57,13 @@
 # Build
 
 ## Build Args
-- `--build-arg VARIANT=mini|node|full` (default: `full`)
+- `--build-arg VARIANT=prod|mini|node|full` (default: `full`)
 
 | Variant | Description |
 |---------|-------------|
 | `full`  | Default. Includes all optional PHP extensions. |
-| `mini`  | Minimal install. Only required PHP extensions. |
+| `prod`  | Production-only. No `bash`, `git`, or `nano`; only required PHP extensions. |
+| `mini`  | Minimal install. Only required PHP extensions, plus `bash`, `git`, `nano`. |
 | `node`  | Full extensions + Node.js and npm. |
 
 ## Environment Variables
@@ -75,6 +78,7 @@
 | `WITH_CRON` | `false` | Enable cron via supercronic |
 | `MAX_BODY_SIZE` | `50m` | Nginx max client body size |
 | `MAX_TIMEOUT` | `120` | Nginx & proxy timeout (seconds) |
+| `APP_ROOT` | `/app/public` | Nginx document root |
 
 ---
 
@@ -86,7 +90,7 @@ Use `build-local.sh` to build all images locally before pushing to Docker Hub.
 # Make the script executable (first time only)
 chmod +x build-local.sh
 
-# Build all images (15 total)
+# Build all images (18 total)
 ./build-local.sh
 
 # Build all variants for a specific PHP version
@@ -94,6 +98,7 @@ chmod +x build-local.sh
 
 # Build a specific PHP version and variant
 ./build-local.sh 8.4 full
+./build-local.sh 8.4 prod
 ./build-local.sh 8.3 mini
 ./build-local.sh 8.5 node
 ```
@@ -112,12 +117,15 @@ docker build --build-arg ALPINE_VERSION=3.19 --build-arg PHP_VERSION=8.1 --build
 docker build --build-arg ALPINE_VERSION=3.19 --build-arg PHP_VERSION=8.1 --build-arg PHP_NUMBER=81 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:8.1-mini -f Dockerfile .
 docker build --build-arg ALPINE_VERSION=3.21 --build-arg PHP_VERSION=8.2 --build-arg PHP_NUMBER=82 -t adityadarma/alpine-php-nginx:8.2 -f Dockerfile .
 docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.3 --build-arg PHP_NUMBER=83 -t adityadarma/alpine-php-nginx:8.3 -f Dockerfile .
+docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.3 --build-arg PHP_NUMBER=83 --build-arg VARIANT=prod -t adityadarma/alpine-php-nginx:8.3-prod -f Dockerfile .
 docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.3 --build-arg PHP_NUMBER=83 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:8.3-mini -f Dockerfile .
 docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.3 --build-arg PHP_NUMBER=83 --build-arg VARIANT=node -t adityadarma/alpine-php-nginx:8.3-node -f Dockerfile .
 docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.4 --build-arg PHP_NUMBER=84 -t adityadarma/alpine-php-nginx:8.4 -f Dockerfile .
+docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.4 --build-arg PHP_NUMBER=84 --build-arg VARIANT=prod -t adityadarma/alpine-php-nginx:8.4-prod -f Dockerfile .
 docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.4 --build-arg PHP_NUMBER=84 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:8.4-mini -f Dockerfile .
 docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.4 --build-arg PHP_NUMBER=84 --build-arg VARIANT=node -t adityadarma/alpine-php-nginx:8.4-node -f Dockerfile .
 docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.5 --build-arg PHP_NUMBER=85 -t adityadarma/alpine-php-nginx:8.5 -f Dockerfile .
+docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.5 --build-arg PHP_NUMBER=85 --build-arg VARIANT=prod -t adityadarma/alpine-php-nginx:8.5-prod -f Dockerfile .
 docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.5 --build-arg PHP_NUMBER=85 --build-arg VARIANT=mini -t adityadarma/alpine-php-nginx:8.5-mini -f Dockerfile .
 docker build --build-arg ALPINE_VERSION=3.23 --build-arg PHP_VERSION=8.5 --build-arg PHP_NUMBER=85 --build-arg VARIANT=node -t adityadarma/alpine-php-nginx:8.5-node -f Dockerfile .
 ```
@@ -132,12 +140,15 @@ docker push adityadarma/alpine-php-nginx:8.1
 docker push adityadarma/alpine-php-nginx:8.1-mini
 docker push adityadarma/alpine-php-nginx:8.2
 docker push adityadarma/alpine-php-nginx:8.3
+docker push adityadarma/alpine-php-nginx:8.3-prod
 docker push adityadarma/alpine-php-nginx:8.3-mini
 docker push adityadarma/alpine-php-nginx:8.3-node
 docker push adityadarma/alpine-php-nginx:8.4
+docker push adityadarma/alpine-php-nginx:8.4-prod
 docker push adityadarma/alpine-php-nginx:8.4-mini
 docker push adityadarma/alpine-php-nginx:8.4-node
 docker push adityadarma/alpine-php-nginx:8.5
+docker push adityadarma/alpine-php-nginx:8.5-prod
 docker push adityadarma/alpine-php-nginx:8.5-mini
 docker push adityadarma/alpine-php-nginx:8.5-node
 ```
