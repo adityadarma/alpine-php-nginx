@@ -50,6 +50,12 @@ jobs:
           - alpine_version: "3.23"
             php_version: "8.3"
             php_number: "83"
+            variant: "prod"
+            tag_suffix: "8.3-prod"
+
+          - alpine_version: "3.23"
+            php_version: "8.3"
+            php_number: "83"
             variant: "mini"
             tag_suffix: "8.3-mini"
 
@@ -67,6 +73,12 @@ jobs:
           - alpine_version: "3.23"
             php_version: "8.4"
             php_number: "84"
+            variant: "prod"
+            tag_suffix: "8.4-prod"
+
+          - alpine_version: "3.23"
+            php_version: "8.4"
+            php_number: "84"
             variant: "mini"
             tag_suffix: "8.4-mini"
 
@@ -80,6 +92,12 @@ jobs:
             php_version: "8.5"
             php_number: "85"
             tag_suffix: "8.5"
+
+          - alpine_version: "3.23"
+            php_version: "8.5"
+            php_number: "85"
+            variant: "prod"
+            tag_suffix: "8.5-prod"
 
           - alpine_version: "3.23"
             php_version: "8.5"
